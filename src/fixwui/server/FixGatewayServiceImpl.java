@@ -1,5 +1,8 @@
 package fixwui.server;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
@@ -19,9 +22,10 @@ import fixwui.client.FixGatewayService;
 
 @SuppressWarnings("serial")
 public class FixGatewayServiceImpl extends RemoteServiceServlet implements
-        FixGatewayService {
+FixGatewayService {
     
     private static EngineFactory _engineFact;
+    private Engine _engine;
     
     @Override
     public void init(final ServletConfig config) throws ServletException {
@@ -35,12 +39,12 @@ public class FixGatewayServiceImpl extends RemoteServiceServlet implements
 	    if ( engineobj instanceof EngineFactory ) {
 		
 		_engineFact = (EngineFactory) engineobj;
-		Engine engine = _engineFact.createEngine();
-		engine.initEngine("banzai.cfg");
+		_engine = _engineFact.createEngine();
+		_engine.initEngine("banzai.cfg");
 		
 		Application application = new _Application();
 		
-		engine.startInProcess(application);
+		_engine.startInProcess(application);
 		
 		System.out.println("engine started");
 	    }
@@ -51,8 +55,15 @@ public class FixGatewayServiceImpl extends RemoteServiceServlet implements
     }
     
     @Override
-    public String[] getSessionList() throws IllegalArgumentException {
-	return new String[] { "Dummy1", "Dummy2" };
+    public ArrayList<String> getSessionList() throws IllegalArgumentException {
+	ArrayList<String> sessions = new ArrayList<String>();
+	
+	for ( Session session : _engine.getAllSessions() ) {
+	    sessions.add(session.getSenderCompID() + "<-->" + session.getTargetCompID());
+	}
+	
+	Collections.sort(sessions);
+	return sessions;
     }
     
     private static class _Application implements Application {
