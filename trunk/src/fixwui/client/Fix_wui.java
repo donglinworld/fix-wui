@@ -1,5 +1,7 @@
 package fixwui.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Position;
@@ -39,10 +41,10 @@ public class Fix_wui implements EntryPoint {
 	final ListBox listBox = new ListBox();
 	listBox.setName("sessionlist");
 	mainPanel.add(listBox, 18, 26);
-	listBox.setSize("133px", "532px");
+	listBox.setSize("276px", "532px");
 	listBox.setVisibleItemCount(500);
 	
-	fixGatewayService.getSessionList(new AsyncCallback<String[]>() {
+	fixGatewayService.getSessionList(new AsyncCallback<ArrayList<String>>() {
 	    
 	    @Override
 	    public void onFailure(final Throwable caught) {
@@ -51,7 +53,7 @@ public class Fix_wui implements EntryPoint {
 	    }
 	    
 	    @Override
-	    public void onSuccess(final String[] result) {
+	    public void onSuccess(final ArrayList<String> result) {
 		for ( String session : result ) {
 		    listBox.addItem(session);
 		}

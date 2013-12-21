@@ -1,5 +1,7 @@
 package fixwui.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -7,5 +9,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface FixGatewayServiceAsync {
     
-    void getSessionList(AsyncCallback<String[]> callback);
+    void getSessionList(AsyncCallback<ArrayList<String>> callback);
 }

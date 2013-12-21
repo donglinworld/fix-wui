@@ -1,5 +1,7 @@
 package fixwui.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -9,5 +11,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("FixGatewayService")
 public interface FixGatewayService extends RemoteService {
     
-    String[] getSessionList() throws IllegalArgumentException;
+    ArrayList<String> getSessionList() throws IllegalArgumentException;
 }
