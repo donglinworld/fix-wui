@@ -8,6 +8,7 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 
 /**
@@ -38,11 +39,14 @@ public class Fix_wui implements EntryPoint {
 	mainPanel.setSize("800", "600");
 	mainPanel.getElement().getStyle().setPosition(Position.RELATIVE);
 	
+	ScrollPanel scrollPanel = new ScrollPanel();
+	mainPanel.add(scrollPanel, 10, 10);
+	scrollPanel.setSize("258px", "19px");
+	
 	final ListBox listBox = new ListBox();
+	scrollPanel.setWidget(listBox);
 	listBox.setName("sessionlist");
-	mainPanel.add(listBox, 18, 26);
-	listBox.setSize("276px", "532px");
-	listBox.setVisibleItemCount(500);
+	listBox.setSize("100%", "100%");
 	
 	fixGatewayService.getSessionList(new AsyncCallback<ArrayList<String>>() {
 	    
