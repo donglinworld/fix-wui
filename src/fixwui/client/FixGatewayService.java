@@ -8,5 +8,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("FixGatewayService")
 public interface FixGatewayService extends RemoteService {
+    
     String[] getSessionList() throws IllegalArgumentException;
 }
